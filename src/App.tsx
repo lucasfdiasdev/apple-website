@@ -3,6 +3,7 @@ import Model from "./components/model";
 import Navbar from "./components/navbar";
 import Highlights from "./components/highlights";
 import Features from "./components/features";
+import HowItWorks from "./components/how-it-works";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Highlights />
       <Model />
       <Features />
+      <HowItWorks />
     </main>
   );
 }
