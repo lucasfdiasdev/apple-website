@@ -1,17 +1,30 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
+
+interface AnimationProps {
+  opacity?: number;
+  y?: number;
+  ease?: string;
+  duration?: number;
+  transform?: string;
+}
+interface ScrollProps {
+  scrub?: number;
+}
+
+interface IAnimateGsap {
+  target: string;
+  animationProps: AnimationProps;
+  scrollProps: ScrollProps;
+}
 
 export const animateWithGsap = ({
   target,
   animationProps,
   scrollProps,
-}: {
-  target: string;
-  animationProps: gsap.TweenVars;
-  scrollProps: ScrollTrigger.Vars;
-}) => {
+}: IAnimateGsap) => {
   gsap.to(target, {
     ...animationProps,
     scrollTrigger: {
@@ -23,6 +36,15 @@ export const animateWithGsap = ({
   });
 };
 
+interface IAnimateGsapTimeline {
+  timeline: gsap.core.Timeline; // Defina o tipo como gsap.core.Timeline
+  rotationRef: React.MutableRefObject<any>; // Certifique-se de que a referência de rotação tenha o tipo correto
+  rotationState: number;
+  firstTarget: string;
+  secondTarget: string;
+  animationProps: AnimationProps;
+}
+
 export const animateWithGsapTimeline = ({
   timeline,
   rotationRef,
@@ -30,16 +52,9 @@ export const animateWithGsapTimeline = ({
   firstTarget,
   secondTarget,
   animationProps,
-}: {
-  timeline: gsap.core.Timeline;
-  rotationRef: React.MutableRefObject<{ rotation: number }>;
-  rotationState: number;
-  firstTarget: HTMLElement;
-  secondTarget: HTMLElement;
-  animationProps: gsap.TweenVars;
-}) => {
-  timeline.to(rotationRef.current, {
-    rotation: rotationState,
+}: IAnimateGsapTimeline) => {
+  timeline.to(rotationRef.current.rotation, {
+    y: rotationState,
     duration: 1,
     ease: "power2.inOut",
   });
