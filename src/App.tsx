@@ -1,8 +1,9 @@
 import Hero from "./components/hero";
 import Model from "./components/model";
 import Navbar from "./components/navbar";
-import Highlights from "./components/highlights";
+import Footer from "./components/footer";
 import Features from "./components/features";
+import Highlights from "./components/highlights";
 import HowItWorks from "./components/how-it-works";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Model />
       <Features />
       <HowItWorks />
+      <Footer />
     </main>
   );
 }
